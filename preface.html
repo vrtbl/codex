@@ -3,9 +3,8 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title></title>
-                        <base href="/">
-        
+        <title>A Short Preface - The Passerine Codex</title>
+                
 
         <!-- Custom HTML head -->
         
@@ -83,7 +82,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="preface.html"><strong aria-hidden="true">1.</strong> A Short Preface</a></li><li class="chapter-item expanded "><a href="road-ahead.html"><strong aria-hidden="true">2.</strong> The Road Ahead</a></li><li class="chapter-item expanded "><a href="core/core.html"><strong aria-hidden="true">3.</strong> The Core Language</a></li></ol>            </div>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="preface.html" class="active"><strong aria-hidden="true">1.</strong> A Short Preface</a></li><li class="chapter-item expanded "><a href="road-ahead.html"><strong aria-hidden="true">2.</strong> The Road Ahead</a></li><li class="chapter-item expanded "><a href="core/core.html"><strong aria-hidden="true">3.</strong> The Core Language</a></li></ol>            </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
 
@@ -144,14 +143,45 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="document-not-found-404"><a class="header" href="#document-not-found-404">Document not found (404)</a></h1>
-<p>This URL is invalid, sorry. Please use the navigation bar or search to continue.</p>
+                        <h1 id="the-passerine-codex"><a class="header" href="#the-passerine-codex">The Passerine Codex</a></h1>
+<p><em>An Extensive Overview of Passerine</em></p>
+<h2 id="foreword"><a class="header" href="#foreword">Foreword</a></h2>
+<p><em>By Isaac Clayton</em></p>
+<p>Passerine is in an early stage of development, so it's hard to pin down exactly what it will become. In this respect, we have a single point on the wall: there are a lot of lines that can be drawn through a point, there a lot of different direction this language could take.</p>
+<p>So in the following foreword, I want to lay out a bit of my history with computers, and discuss what I've come to learn about talking to them. This will hopefully put another metaphorical 'point on the wall.' Two points form a line, of course, and I'm hoping the the line drawn by this codex and the code we have now will be enough to find the 'figure in the marble' and chisel out the rest of Passerine.</p>
+<p>Too heavy on the metaphor? Probably.</p>
+<p>I first thought of developing a programming language for myself when I was around 12 or 13. At the time, I had just stumbled across lisp, having learned Python a few years before (by working through Downey's <em>Think Python</em>). I was quite enthralled by the possibilities lisp opened in my mind: if programs are sets of transformations on data (<em>Functional Programming</em>), and theprograms themselves are data (<em>Metaprogramming</em>), what can't we code? Wanting to learn more, I learned Common Lisp (through <em>On Lisp</em>), and them Scheme (through the <em>Wizard Book</em>, which I'm still particularly fond of).</p>
+<p>So, with lisp on my mind, I wrote one. It was nothing more than a toy, of course - A thin veneer of a parser tacked onto Norvig's Python scheme - but it was a language nonetheless.</p>
+<p>One thing that I did not like about lisps, though, was <em>homoiconicity</em>, or at least the usual way the word is interpreted. After all, <em>Homoiconicity isn’t the point</em>. If what matters in a macro system is the concept of forms, then requiring code and data to have the same syntax seems a tad counterproductive: by having code and data appear to be the same, it's hard to get a feel for what the code is doing be examining the shape of it. Data should be presented in the simplest for that still preserves visual uniqueness. The semantic operators that determine how the underlying data is processed should be distinctive enough to easily be recognizable and actionable:</p>
+<blockquote>
+<p>&quot;[This engages] the brain's visual processing machinery, which operates largely subconsciously, and tells the consciousness part of what it sees.&quot;</p>
+<p>— Guido van Rossum</p>
+</blockquote>
+<p>Do I think text is the right medium for programming? Maybe. There's too much unexplored territory in the space of language design to reach any definite conclusions yet.</p>
+<p>Lisp, of course, is more a category of languages than a single standard; the featureless landscape of parenthesis, while beautiful in all its symmetries, lacks the benefit concise notation brings. Oh well, maybe I haven't written enough lisp. I extended the small lisp I wrote earlier into a language called <em>Aspen</em>: essentially, a small scheme with richer syntax. This endeavor was simplistic at best - I felt I had exhausted most of what lisp had to offer for me at that time -</p>
+<p>So I moved onto other languages. I juggled pointers with C, categorized with Haskell, tore apart datastructures with OCaml, threw exceptions with Java (then threw Java out the window), marched fractals in GLSL, beamed messages around with Erlang and Elixer, reinforced agents in Python; and this is just the tip of the iceberg. Languages were the tools I used to rip through the universe of computation, exposing new corners for breaking down abstractions, if only to build them back up a bit more airtight later, perhaps.</p>
+<p>Languages are, after all, just tools to express computation: no matter how hard we try, there will never be a language that won't make us clarify our ideas.</p>
+<p>But we <em>can</em>, at the very least, build languages that make those ideas easier to express.</p>
+<p>About two years ago now (as of 2020), I stumbled across Rust (I was 14 at the time). Rust opened my mind yet again to another world of possibilities. Ownership and borrowing allow us to express fine-grained control over <em>resources</em>. Being functional yet imperative, Rust also challenged my assumptions about what it meant to follow a paradigm. In the words of Saoirse:</p>
+<blockquote>
+<p>Pure functional programming is an ingenious trick to show you can code without mutation. Rust is an even cleverer trick to show you can just have mutation.</p>
+<p>— Saoirse (withoutboats)</p>
+</blockquote>
+<p>Rust is now my preferred programming language. I'm not going to wax poetic and tell you that it's the best language in existence, but it's certainly a very <em>very</em> nice one. Although it may be superficially complex, it's conceptually elegant (and I mean that in the best way possible). More importantly, the community that has developed around Rust is exceptional, and I'm grateful for the interactions I've have (and have yet to have had) with the Rust community.</p>
+<p>Now, what does any of this have to do with Passerine?</p>
+<p>Designing a language without taking inspiration from others is a fools errand. I hope I've shown you the path I have followed to reach the point where I'm at now. Making a programming language is a bit like making a soup: take a little of everything, let it simmer for a while, and serve it while it's hot.</p>
+<p>So: over the past few years or so, an idea for a novel programming language has been simmering in my mind. This language is the compounded framework of ideas I've developed since I've started programming, boiled down to a refined core.</p>
+<p>This language, of course, is Passerine: a small core language that is easily extensible, with roots in Scheme and ML-flavored languages. Above all else, Passerine is the tool I've always wished I had. I find it to be useful for me, and I hope that it will be useful for you too.</p>
+<p>— Isaac Clayton (slightknack)</p>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
                         
+                                                    <a rel="next" href="road-ahead.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
                         
                         <div style="clear: both"></div>
                     </nav>
@@ -160,6 +190,9 @@
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
                 
+                                    <a rel="next" href="road-ahead.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
                             </nav>
 
         </div>
