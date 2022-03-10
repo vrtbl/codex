@@ -1,7 +1,5 @@
 ## The Road Ahead
 
-I feel it a bit funny to be using the word Codex for this guide, I feel like I may be stepping on Scott's toes a bit. Onward!
-
 ![A winding mountain desert road thing, much like the journey we're about to have!](https://cdn.aarp.net/content/dam/aarp/home-and-family/family-and-friends/2018/05/1140-utah-road-trip-planning.imgcache.revc8d3f86f90c6edc63fc2b92a8a311a72.jpg)
 
 This codex is organized into a bunch of sections. Each section builds on the last. By the end, you should have a pretty good picture of what Passerine is, and what it aspires to be.
