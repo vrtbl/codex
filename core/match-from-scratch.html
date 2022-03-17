@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>The Core Language - The Passerine Codex</title>
+        <title>Match From Scratch - The Passerine Codex</title>
         <!-- Custom HTML head -->
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
@@ -75,7 +75,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="../preface.html"><strong aria-hidden="true">1.</strong> A Short Preface</a></li><li class="chapter-item expanded "><a href="../road-ahead.html"><strong aria-hidden="true">2.</strong> The Road Ahead</a></li><li class="chapter-item expanded "><a href="../getting-started/getting-started.html"><strong aria-hidden="true">3.</strong> Getting Started</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../getting-started/installation.html"><strong aria-hidden="true">3.1.</strong> Installation</a></li><li class="chapter-item expanded "><a href="../getting-started/hello-world.html"><strong aria-hidden="true">3.2.</strong> Hello, World!</a></li></ol></li><li class="chapter-item expanded "><a href="../core/core.html" class="active"><strong aria-hidden="true">4.</strong> The Core Language</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../core/syntax.html"><strong aria-hidden="true">4.1.</strong> Syntax</a></li><li class="chapter-item expanded "><a href="../core/a-quick-example.html"><strong aria-hidden="true">4.2.</strong> A Quick(sort) Example</a></li><li class="chapter-item expanded "><a href="../core/function-application.html"><strong aria-hidden="true">4.3.</strong> Function Application</a></li><li class="chapter-item expanded "><a href="../core/pattern-matching.html"><strong aria-hidden="true">4.4.</strong> Pattern Matching</a></li><li class="chapter-item expanded "><a href="../core/fibers.html"><strong aria-hidden="true">4.5.</strong> Fibers</a></li><li class="chapter-item expanded "><a href="../core/error-handling.html"><strong aria-hidden="true">4.6.</strong> Error Handling</a></li><li class="chapter-item expanded "><a href="../core/macros.html"><strong aria-hidden="true">4.7.</strong> Macros</a></li><li class="chapter-item expanded "><a href="../core/match-from-scratch.html"><strong aria-hidden="true">4.8.</strong> Match From Scratch</a></li><li class="chapter-item expanded "><a href="../core/modules.html"><strong aria-hidden="true">4.9.</strong> Modules</a></li></ol></li><li class="chapter-item expanded "><a href="../concluding-thoughts.html"><strong aria-hidden="true">5.</strong> Concluding Thoughts</a></li><li class="chapter-item expanded "><a href="../faq.html"><strong aria-hidden="true">6.</strong> Frequently Asked Questions</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../preface.html"><strong aria-hidden="true">1.</strong> A Short Preface</a></li><li class="chapter-item expanded "><a href="../road-ahead.html"><strong aria-hidden="true">2.</strong> The Road Ahead</a></li><li class="chapter-item expanded "><a href="../getting-started/getting-started.html"><strong aria-hidden="true">3.</strong> Getting Started</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../getting-started/installation.html"><strong aria-hidden="true">3.1.</strong> Installation</a></li><li class="chapter-item expanded "><a href="../getting-started/hello-world.html"><strong aria-hidden="true">3.2.</strong> Hello, World!</a></li></ol></li><li class="chapter-item expanded "><a href="../core/core.html"><strong aria-hidden="true">4.</strong> The Core Language</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../core/syntax.html"><strong aria-hidden="true">4.1.</strong> Syntax</a></li><li class="chapter-item expanded "><a href="../core/a-quick-example.html"><strong aria-hidden="true">4.2.</strong> A Quick(sort) Example</a></li><li class="chapter-item expanded "><a href="../core/function-application.html"><strong aria-hidden="true">4.3.</strong> Function Application</a></li><li class="chapter-item expanded "><a href="../core/pattern-matching.html"><strong aria-hidden="true">4.4.</strong> Pattern Matching</a></li><li class="chapter-item expanded "><a href="../core/fibers.html"><strong aria-hidden="true">4.5.</strong> Fibers</a></li><li class="chapter-item expanded "><a href="../core/error-handling.html"><strong aria-hidden="true">4.6.</strong> Error Handling</a></li><li class="chapter-item expanded "><a href="../core/macros.html"><strong aria-hidden="true">4.7.</strong> Macros</a></li><li class="chapter-item expanded "><a href="../core/match-from-scratch.html" class="active"><strong aria-hidden="true">4.8.</strong> Match From Scratch</a></li><li class="chapter-item expanded "><a href="../core/modules.html"><strong aria-hidden="true">4.9.</strong> Modules</a></li></ol></li><li class="chapter-item expanded "><a href="../concluding-thoughts.html"><strong aria-hidden="true">5.</strong> Concluding Thoughts</a></li><li class="chapter-item expanded "><a href="../faq.html"><strong aria-hidden="true">6.</strong> Frequently Asked Questions</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -134,17 +134,106 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="the-core-language"><a class="header" href="#the-core-language">The Core Language</a></h1>
-<p>In this chapter, we will take a look at the core language features offered by Passerine.</p>
+                        <h2 id="building-a-match-expression"><a class="header" href="#building-a-match-expression">Building a <code>match</code> expression</a></h2>
+<p>A match expression takes a value and a number of functions, and tries to apply the value to each function until one successfully matches and runs. A match expression looks as like this:</p>
+<pre><code class="language-elm">l = Some (1, 2, 3)
+
+match l {
+    Some (m, x, b) -&gt; m * x + b
+    None           -&gt; 0
+}
+</code></pre>
+<p>Here's how we can match a match expression:</p>
+<pre><code class="language-elm">syntax 'match value { arms... } {
+    -- TODO: implement the body
+}
+</code></pre>
+<p>This should be read as:</p>
+<blockquote>
+<p>The syntax for a match expression starts with the pseudokeyword <code>match</code>, followed by the <code>value</code> to match against, followed by a block where each item in the block gets collected into the list <code>arms</code>.</p>
+</blockquote>
+<p>What about the body? Well:</p>
+<ol>
+<li>If no branches are matched, an error is raised.</li>
+<li>If are some branches, we <code>try</code> the first branch in a new fiber and see if it matches.</li>
+<li>If the function doesn't raise a match error, we found a match!</li>
+<li>If the function does raise a match error, we try again with the remaining branches.</li>
+</ol>
+<p>Let's start by implementing this as a function:</p>
+<pre><code class="language-elm">-- takes a value to match against
+-- and a list of functions, branches
+match_function = value branches -&gt; {
+    if branches.is_empty {
+        error Match &quot;No branches matched in match expression&quot;
+    }
+
+    result = try { (head branches) value }
+
+    if result is Result.Ok _ {
+        Result.Ok v = result; v
+    } else if result is Result.Error Match _ {
+        match_function value (tail branches)
+    } else if result is Result.Error _ {
+        -- a different error occurred, so we re-raise it
+        Result.Error e = result; error e
+    }
+}
+</code></pre>
+<p>I know the use of <code>if</code> to handle tasks that pattern matching excels at hurts a little, but remember, <em>that's why we're building a match expression!</em> Using base constructs to create higher-level affordances with little overhead is a core theme of Passerine development.</p>
+<p>Here's how you could use <code>match_function</code>, by the way:</p>
+<pre><code class="language-elm">-- Note that we're passing a list of functions
+description = match_function Banana (&quot;yellow&quot;, &quot;soft&quot;) [
+    Banana (&quot;brown&quot;, &quot;mushy&quot;) -&gt; &quot;That's not my banana!&quot;,
+
+    Banana (&quot;yellow&quot;, flesh)
+        | flesh != &quot;soft&quot;
+        -&gt; &quot;I mean it's yellow, but not soft&quot;,
+
+    Banana (peel, &quot;soft&quot;)
+        | peel != &quot;yellow&quot;
+        -&gt; &quot;I mean it's soft, but not yellow&quot;,
+
+    Banana (&quot;yellow&quot;, &quot;soft&quot;) -&gt; &quot;That's my banana!&quot;,
+
+    Banana (color, texture)
+        -&gt; &quot;Hmm. I've never seen a { texture } { color } banana before...&quot;,
+]
+</code></pre>
+<p>This is already orders of magnitude better, but passing a list of functions still feels a bit... hacky. Let's use our <code>match</code> macro definition from earlier to make this more ergonomic:</p>
+<pre><code class="language-elm">syntax 'match value { arms... } {
+    match_function value arms
+}
+</code></pre>
+<p>We've added match expression to Passerine, and they already feel like language features*! Isn't that incredible? Here's the above example we used with <code>match_function</code> adapted to <code>match</code>†:</p>
+<pre><code class="language-elm">description = match Banana (&quot;yellow&quot;, &quot;soft&quot;) {
+    Banana (&quot;brown&quot;, &quot;mushy&quot;) -&gt; &quot;That's not my banana!&quot;
+
+    Banana (&quot;yellow&quot;, flesh)
+        | flesh != &quot;soft&quot;
+        -&gt; &quot;I mean it's yellow, but not soft&quot;
+
+    Banana (peel, &quot;soft&quot;)
+        | peel != &quot;yellow&quot;
+        -&gt; &quot;I mean it's soft, but not yellow&quot;
+
+    Banana (&quot;yellow&quot;, &quot;soft&quot;) -&gt; &quot;That's my banana!&quot;
+
+    Banana (color, texture)
+        -&gt; &quot;Hmm. I've never seen a { texture } { color } banana before...&quot;
+}
+</code></pre>
+<blockquote>
+<p>† Plot twist: we just defined the <code>match</code> expression we've been using throughout this entire overview.</p>
+</blockquote>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="../getting-started/hello-world.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="../core/macros.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
-                            <a rel="next" href="../core/syntax.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next" href="../core/modules.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
                         <div style="clear: both"></div>
@@ -153,10 +242,10 @@
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="../getting-started/hello-world.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="../core/macros.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
-                    <a rel="next" href="../core/syntax.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next" href="../core/modules.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
             </nav>

@@ -1,0 +1,279 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Macros - The Passerine Codex</title>
+        <!-- Custom HTML head -->
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../preface.html"><strong aria-hidden="true">1.</strong> A Short Preface</a></li><li class="chapter-item expanded "><a href="../road-ahead.html"><strong aria-hidden="true">2.</strong> The Road Ahead</a></li><li class="chapter-item expanded "><a href="../getting-started/getting-started.html"><strong aria-hidden="true">3.</strong> Getting Started</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../getting-started/installation.html"><strong aria-hidden="true">3.1.</strong> Installation</a></li><li class="chapter-item expanded "><a href="../getting-started/hello-world.html"><strong aria-hidden="true">3.2.</strong> Hello, World!</a></li></ol></li><li class="chapter-item expanded "><a href="../core/core.html"><strong aria-hidden="true">4.</strong> The Core Language</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../core/syntax.html"><strong aria-hidden="true">4.1.</strong> Syntax</a></li><li class="chapter-item expanded "><a href="../core/a-quick-example.html"><strong aria-hidden="true">4.2.</strong> A Quick(sort) Example</a></li><li class="chapter-item expanded "><a href="../core/function-application.html"><strong aria-hidden="true">4.3.</strong> Function Application</a></li><li class="chapter-item expanded "><a href="../core/pattern-matching.html"><strong aria-hidden="true">4.4.</strong> Pattern Matching</a></li><li class="chapter-item expanded "><a href="../core/fibers.html"><strong aria-hidden="true">4.5.</strong> Fibers</a></li><li class="chapter-item expanded "><a href="../core/error-handling.html"><strong aria-hidden="true">4.6.</strong> Error Handling</a></li><li class="chapter-item expanded "><a href="../core/macros.html" class="active"><strong aria-hidden="true">4.7.</strong> Macros</a></li><li class="chapter-item expanded "><a href="../core/match-from-scratch.html"><strong aria-hidden="true">4.8.</strong> Match From Scratch</a></li><li class="chapter-item expanded "><a href="../core/modules.html"><strong aria-hidden="true">4.9.</strong> Modules</a></li></ol></li><li class="chapter-item expanded "><a href="../concluding-thoughts.html"><strong aria-hidden="true">5.</strong> Concluding Thoughts</a></li><li class="chapter-item expanded "><a href="../faq.html"><strong aria-hidden="true">6.</strong> Frequently Asked Questions</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">The Passerine Codex</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h2 id="macros"><a class="header" href="#macros">Macros</a></h2>
+<p>Passerine has a rich hygienic* syntactic macro system that extends the language itself.</p>
+<p><em>Syntactic macros</em>, quite simply, are bits of code that <em>hygienically</em> produce more code when invoked at compile time. Macros use a small, simple-yet-powerful set of rules to transform code.</p>
+<blockquote>
+<p>* Having read Doug Hoyte's exellent <a href="https://letoverlambda.com/">Let Over Lambda</a>, I understand the raw power of a rich <em>unhygenic</em> macro system. However, such systems are hard to comprehend, and harder to master. Passerine aims to be as simple and powerful as possible without losing <em>transparency</em>: hygienic macro systems are much more transparent then their opaque unhygenic counterparts.</p>
+</blockquote>
+<h3 id="hygiene"><a class="header" href="#hygiene">Hygiene</a></h3>
+<p>Extensions are defined with the <code>syntax</code> keyword, followed by some <em>argument patterns</em>, followed by the code that the captured arguments will be spliced into. Here's a simple example: we're using a macro to define <code>swap</code> operator:</p>
+<pre><code class="language-elm">syntax a 'swap b {
+    tmp = a
+    a = b
+    b = tmp
+}
+
+x = 7
+y = 3
+x swap y
+</code></pre>
+<p>Note that the above code is completely hygienic. the expanded macro looks something like this:</p>
+<pre><code class="language-elm">_tmp = x
+x = y
+x = _tmp
+</code></pre>
+<p>Because <code>tmp</code> was not passed as a macro pattern parameter, all uses of <code>tmp</code> in the macro body are unique unrepresentable variables that do not collide with any other variables currently bound in scope. Essentially:</p>
+<pre><code class="language-elm">tmp = 1
+x = 2
+y = 3
+x swap y
+</code></pre>
+<p>Will not affect the value of <code>tmp</code>; <code>tmp</code> will still be <code>1</code>.</p>
+<h4 id="argument-patterns"><a class="header" href="#argument-patterns">Argument Patterns</a></h4>
+<p>So, what is an argument pattern (an <em>arg-pat</em>)? Arg-pats are what go between:</p>
+<pre><code class="language-elm">syntax ... { }
+</code></pre>
+<p>Each item between <code>syntax</code> and the macro body is an arg-pat. Arg-pats can be:</p>
+<ul>
+<li><em>Syntactic variables</em>, like <code>foo</code> and <code>bar</code>.</li>
+<li>Literal <em>syntactic identifiers</em>, which are prefixed with a quote (<code>'</code>), like <code>'let</code>.</li>
+<li>Nested argument patterns, followed by optional <em>modifiers</em>.</li>
+</ul>
+<p>Let's start with <em>syntactic identifiers</em>. Identifiers are literal names that must be present for the pattern to match. Each syntactic extension is required to have at least one. For example, here's a macro that matches a <em>for loop</em>:</p>
+<pre><code class="language-elm">syntax 'for binding 'in values do { ... }
+</code></pre>
+<p>In this case, <code>'for</code> and <code>'in</code> are syntactic identifiers. This definition could be used as follows:</p>
+<pre><code class="language-elm">for a in [1, 2, 3] {
+    print a
+}
+</code></pre>
+<p><em>Syntactic variables</em> are the other identifiers in the pattern that are bound to actual values. In the above example, <code>a</code> → <code>binding</code>, <code>[1, 2, 3]</code> → <code>values</code>, and <code>{ print a }</code> → <code>do</code>.</p>
+<p>Macros can also be used to define operators†:</p>
+<pre><code class="language-elm">syntax sequence 'contains value {
+    c = seq -&gt; match seq {
+        [] -&gt; False
+        [head, ..] | head == value -&gt; True
+        [_, ..tail] -&gt; c tail
+    }
+
+    c sequence
+}
+</code></pre>
+<p>This defines a <code>contains</code> operator that could be used as follows:</p>
+<pre><code class="language-elm">print {
+    if [1, 2, 3] contains 2 {
+        &quot;It contains 2&quot;
+    } else {
+        &quot;It does not contain 2&quot;
+    }
+}
+</code></pre>
+<p>Evidently, <code>It contains 2</code> would be printed.</p>
+<blockquote>
+<p>† Custom operators defined in this manner will always have the lowest precedence, and must be explicitly grouped when ambiguous. For this reason, Passerine already has a number of built-in operators (with proper precedence) which can be overloaded. It's important to note that macros serve to introduce new constructs that just <em>happen</em> to be composable – syntactic macros can be used to make custom operators, but they can be used for <em>so much more</em>. I think this is a fair trade-off to make.</p>
+</blockquote>
+<p><em>Modifiers</em> are postfix symbols that allow for flexibility within argument patterns. Here are some modifiers:</p>
+<ul>
+<li>Zero or more (<code>...</code>)</li>
+<li>Optional (<code>?</code>)</li>
+</ul>
+<p>Additionally, parenthesis are used for grouping, and <code>{ ... }</code> are used to match expressions within blocks. Let's construct some syntactic arguments that match an <code>if else</code> statement, like this one:</p>
+<pre><code class="language-elm">if x == 0 {
+    print &quot;Zero&quot;
+} else if x % 2 == 0 {
+    print &quot;Even&quot;
+} else {
+    print &quot;Not even or zero&quot;
+}
+</code></pre>
+<p>The arg-pat must match a beginning <code>if</code>:</p>
+<pre><code class="language-elm">syntax 'if { ... }
+</code></pre>
+<p>Then, a condition:</p>
+<pre><code class="language-elm">syntax 'if condition { ... }
+</code></pre>
+<p>Then, the first block:</p>
+<pre><code class="language-elm">syntax 'if condition then { ... }
+</code></pre>
+<p>Next, we'll need a number of <code>else if &lt;condition&gt;</code> statements:</p>
+<pre><code class="language-elm">syntax 'if condition then ('else 'if others do)... { ... }
+</code></pre>
+<p>Followed by a required closing else (Passerine is expression oriented and type-checked, so a closing <code>else</code> ensures that an <code>if</code> expression always returns a value.):</p>
+<pre><code class="language-elm">syntax 'if condition then ('else 'if others do)... 'else finally { ... }
+</code></pre>
+<p>Of course, if statements are already baked into the language – let's build something else – a <code>match</code> expression.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../core/error-handling.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                            <a rel="next" href="../core/match-from-scratch.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../core/error-handling.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                    <a rel="next" href="../core/match-from-scratch.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+    </body>
+</html>

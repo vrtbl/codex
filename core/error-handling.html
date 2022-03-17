@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>The Core Language - The Passerine Codex</title>
+        <title>Error Handling - The Passerine Codex</title>
         <!-- Custom HTML head -->
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
@@ -75,7 +75,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="../preface.html"><strong aria-hidden="true">1.</strong> A Short Preface</a></li><li class="chapter-item expanded "><a href="../road-ahead.html"><strong aria-hidden="true">2.</strong> The Road Ahead</a></li><li class="chapter-item expanded "><a href="../getting-started/getting-started.html"><strong aria-hidden="true">3.</strong> Getting Started</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../getting-started/installation.html"><strong aria-hidden="true">3.1.</strong> Installation</a></li><li class="chapter-item expanded "><a href="../getting-started/hello-world.html"><strong aria-hidden="true">3.2.</strong> Hello, World!</a></li></ol></li><li class="chapter-item expanded "><a href="../core/core.html" class="active"><strong aria-hidden="true">4.</strong> The Core Language</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../core/syntax.html"><strong aria-hidden="true">4.1.</strong> Syntax</a></li><li class="chapter-item expanded "><a href="../core/a-quick-example.html"><strong aria-hidden="true">4.2.</strong> A Quick(sort) Example</a></li><li class="chapter-item expanded "><a href="../core/function-application.html"><strong aria-hidden="true">4.3.</strong> Function Application</a></li><li class="chapter-item expanded "><a href="../core/pattern-matching.html"><strong aria-hidden="true">4.4.</strong> Pattern Matching</a></li><li class="chapter-item expanded "><a href="../core/fibers.html"><strong aria-hidden="true">4.5.</strong> Fibers</a></li><li class="chapter-item expanded "><a href="../core/error-handling.html"><strong aria-hidden="true">4.6.</strong> Error Handling</a></li><li class="chapter-item expanded "><a href="../core/macros.html"><strong aria-hidden="true">4.7.</strong> Macros</a></li><li class="chapter-item expanded "><a href="../core/match-from-scratch.html"><strong aria-hidden="true">4.8.</strong> Match From Scratch</a></li><li class="chapter-item expanded "><a href="../core/modules.html"><strong aria-hidden="true">4.9.</strong> Modules</a></li></ol></li><li class="chapter-item expanded "><a href="../concluding-thoughts.html"><strong aria-hidden="true">5.</strong> Concluding Thoughts</a></li><li class="chapter-item expanded "><a href="../faq.html"><strong aria-hidden="true">6.</strong> Frequently Asked Questions</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../preface.html"><strong aria-hidden="true">1.</strong> A Short Preface</a></li><li class="chapter-item expanded "><a href="../road-ahead.html"><strong aria-hidden="true">2.</strong> The Road Ahead</a></li><li class="chapter-item expanded "><a href="../getting-started/getting-started.html"><strong aria-hidden="true">3.</strong> Getting Started</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../getting-started/installation.html"><strong aria-hidden="true">3.1.</strong> Installation</a></li><li class="chapter-item expanded "><a href="../getting-started/hello-world.html"><strong aria-hidden="true">3.2.</strong> Hello, World!</a></li></ol></li><li class="chapter-item expanded "><a href="../core/core.html"><strong aria-hidden="true">4.</strong> The Core Language</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../core/syntax.html"><strong aria-hidden="true">4.1.</strong> Syntax</a></li><li class="chapter-item expanded "><a href="../core/a-quick-example.html"><strong aria-hidden="true">4.2.</strong> A Quick(sort) Example</a></li><li class="chapter-item expanded "><a href="../core/function-application.html"><strong aria-hidden="true">4.3.</strong> Function Application</a></li><li class="chapter-item expanded "><a href="../core/pattern-matching.html"><strong aria-hidden="true">4.4.</strong> Pattern Matching</a></li><li class="chapter-item expanded "><a href="../core/fibers.html"><strong aria-hidden="true">4.5.</strong> Fibers</a></li><li class="chapter-item expanded "><a href="../core/error-handling.html" class="active"><strong aria-hidden="true">4.6.</strong> Error Handling</a></li><li class="chapter-item expanded "><a href="../core/macros.html"><strong aria-hidden="true">4.7.</strong> Macros</a></li><li class="chapter-item expanded "><a href="../core/match-from-scratch.html"><strong aria-hidden="true">4.8.</strong> Match From Scratch</a></li><li class="chapter-item expanded "><a href="../core/modules.html"><strong aria-hidden="true">4.9.</strong> Modules</a></li></ol></li><li class="chapter-item expanded "><a href="../concluding-thoughts.html"><strong aria-hidden="true">5.</strong> Concluding Thoughts</a></li><li class="chapter-item expanded "><a href="../faq.html"><strong aria-hidden="true">6.</strong> Frequently Asked Questions</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -134,17 +134,86 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="the-core-language"><a class="header" href="#the-core-language">The Core Language</a></h1>
-<p>In this chapter, we will take a look at the core language features offered by Passerine.</p>
+                        <h2 id="error-handling"><a class="header" href="#error-handling">Error handling</a></h2>
+<p>Passerine uses a combination of <em>exceptions</em> and algebraic data types to handle errors. Errors that are expected to happen should be wrapped in a <code>Result</code> type:</p>
+<pre><code class="language-elm">validate_length = n -&gt; {
+    if length n &lt; 5 {
+        Result.Error &quot;It's too short!&quot;
+    } else {
+        Result.Ok n
+    }
+}
+</code></pre>
+<p>Some errors, however, are unexpected. There are an uncountable number of ways software can fail; to account for all external circumstances is flat-out impossible in some cases.</p>
+<p>For this reason, in the case that something that isn't expected to fail fails, an exception is raised. For example, trying to open a file that <em>should</em> exist may throw an error if it has been lost, moved, corrupted, or otherwise has incorrect permissions.</p>
+<pre><code class="language-elm">config = Config.parse (open &quot;config.toml&quot;)
+</code></pre>
+<blockquote>
+<p><code>.</code> is the indexing operator. On a list or tuple, <code>items.0</code> returns the zerost item; on a record, <code>record.field</code> returns the specified field; <strong>on a label, <code>Label.method</code> returns the specified associated method</strong>.</p>
+</blockquote>
+<p>The reason we don't always need to handle these errors is because Passerine follows a fail-fast, fail-safe philosophy. In this regard, Passerine subscribes to the philosophy of Erlang/Elixir:</p>
+<blockquote>
+<p>&quot;Keep calm and let it crash.&quot;</p>
+</blockquote>
+<p>The good news is that crashes are local to the fiber they occur in – a single fiber crashing does <em>not</em> bring down the whole system. The idiomatic way to handle an operation that we know may fail is to try it. <code>try</code> performs the operation in a new fiber and converts any exceptions that may occur into a <code>Result</code>:</p>
+<pre><code class="language-elm">config = match try (open &quot;config.toml&quot;) {
+    Result.Ok    file  -&gt; Config.parse file
+    Result.Error error -&gt; Config.default ()
+}
+</code></pre>
+<p>We know that some functions may raise errors, but how can <em>we</em> signal that something exceptionally bad has happened? We use the <code>error</code> keyword!</p>
+<pre><code class="language-elm">doof = platypus -&gt; {
+    if platypus == &quot;Perry&quot; {
+        -- crashes the current fiber
+        error &quot;What!? Perry the platypus!?&quot;
+    } else {
+        -- oh, it's just a platypus...
+        work_on_inator ()
+    }
+}
+
+-- oh no!
+inator = doof &quot;Perry&quot;
+</code></pre>
+<p>Note that the value of raised errors can be any data. This allows for programmatic recovery from errors:</p>
+<pre><code class="language-elm">-- socket must not be disconnected
+send_data = (
+    socket
+    data
+) -&gt; match socket.connection {
+    -- `Disconnected` is a labeled record
+    Option.None -&gt; error Disconnected {
+        socket,
+        message: &quot;Could not send data; disconnected&quot;,
+    }
+    -- if the connection is open, we send the data
+    Option.Some connection -&gt; connection.write data
+}
+</code></pre>
+<p>Let's say the above code tries to send some data through a socket. To handle a disconnection, we can try the error:</p>
+<pre><code class="language-elm">ping = socket -&gt; try (send_data socket &quot;ping&quot;)
+
+socket = Socket.new &quot;isaac@passerine.io:42069&quot; -- whatever
+socket.disconnect () -- oh no!
+
+result = ping socket
+
+match result {
+    Result.Ok &quot;pong&quot; -&gt; ()
+    Result.Error Disconnected socket -&gt; socked.connect
+}
+</code></pre>
+<p>Why make the distinction between expected errors (<code>Result</code>) and unexpected errors (fiber crashes)? Programs only produce valid results if the environments they run in are valid. When a fiber crashes, it's signaling that something about the environment it's running in is not valid. This is very useful to <em>developers</em> during development, and very useful to <em>programs</em> in contexts where complex long-running applications may fail for any number of reasons.</p>
+<p>Why not only use exceptions then? Because it's perfectly possible for an error to occur that is not exceptional at all. Malformed input, incorrect permissions, missing items – these are all things that can occur and do occur on a regular basis. It's always important to use the right tool for the job; prefer expected errors over unexpected errors.</p>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="../getting-started/hello-world.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="../core/fibers.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
-                            <a rel="next" href="../core/syntax.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next" href="../core/macros.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
                         <div style="clear: both"></div>
@@ -153,10 +222,10 @@
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="../getting-started/hello-world.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="../core/fibers.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
-                    <a rel="next" href="../core/syntax.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next" href="../core/macros.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
             </nav>

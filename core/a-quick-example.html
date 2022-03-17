@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>The Core Language - The Passerine Codex</title>
+        <title>A Quick(sort) Example - The Passerine Codex</title>
         <!-- Custom HTML head -->
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
@@ -75,7 +75,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="../preface.html"><strong aria-hidden="true">1.</strong> A Short Preface</a></li><li class="chapter-item expanded "><a href="../road-ahead.html"><strong aria-hidden="true">2.</strong> The Road Ahead</a></li><li class="chapter-item expanded "><a href="../getting-started/getting-started.html"><strong aria-hidden="true">3.</strong> Getting Started</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../getting-started/installation.html"><strong aria-hidden="true">3.1.</strong> Installation</a></li><li class="chapter-item expanded "><a href="../getting-started/hello-world.html"><strong aria-hidden="true">3.2.</strong> Hello, World!</a></li></ol></li><li class="chapter-item expanded "><a href="../core/core.html" class="active"><strong aria-hidden="true">4.</strong> The Core Language</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../core/syntax.html"><strong aria-hidden="true">4.1.</strong> Syntax</a></li><li class="chapter-item expanded "><a href="../core/a-quick-example.html"><strong aria-hidden="true">4.2.</strong> A Quick(sort) Example</a></li><li class="chapter-item expanded "><a href="../core/function-application.html"><strong aria-hidden="true">4.3.</strong> Function Application</a></li><li class="chapter-item expanded "><a href="../core/pattern-matching.html"><strong aria-hidden="true">4.4.</strong> Pattern Matching</a></li><li class="chapter-item expanded "><a href="../core/fibers.html"><strong aria-hidden="true">4.5.</strong> Fibers</a></li><li class="chapter-item expanded "><a href="../core/error-handling.html"><strong aria-hidden="true">4.6.</strong> Error Handling</a></li><li class="chapter-item expanded "><a href="../core/macros.html"><strong aria-hidden="true">4.7.</strong> Macros</a></li><li class="chapter-item expanded "><a href="../core/match-from-scratch.html"><strong aria-hidden="true">4.8.</strong> Match From Scratch</a></li><li class="chapter-item expanded "><a href="../core/modules.html"><strong aria-hidden="true">4.9.</strong> Modules</a></li></ol></li><li class="chapter-item expanded "><a href="../concluding-thoughts.html"><strong aria-hidden="true">5.</strong> Concluding Thoughts</a></li><li class="chapter-item expanded "><a href="../faq.html"><strong aria-hidden="true">6.</strong> Frequently Asked Questions</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../preface.html"><strong aria-hidden="true">1.</strong> A Short Preface</a></li><li class="chapter-item expanded "><a href="../road-ahead.html"><strong aria-hidden="true">2.</strong> The Road Ahead</a></li><li class="chapter-item expanded "><a href="../getting-started/getting-started.html"><strong aria-hidden="true">3.</strong> Getting Started</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../getting-started/installation.html"><strong aria-hidden="true">3.1.</strong> Installation</a></li><li class="chapter-item expanded "><a href="../getting-started/hello-world.html"><strong aria-hidden="true">3.2.</strong> Hello, World!</a></li></ol></li><li class="chapter-item expanded "><a href="../core/core.html"><strong aria-hidden="true">4.</strong> The Core Language</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../core/syntax.html"><strong aria-hidden="true">4.1.</strong> Syntax</a></li><li class="chapter-item expanded "><a href="../core/a-quick-example.html" class="active"><strong aria-hidden="true">4.2.</strong> A Quick(sort) Example</a></li><li class="chapter-item expanded "><a href="../core/function-application.html"><strong aria-hidden="true">4.3.</strong> Function Application</a></li><li class="chapter-item expanded "><a href="../core/pattern-matching.html"><strong aria-hidden="true">4.4.</strong> Pattern Matching</a></li><li class="chapter-item expanded "><a href="../core/fibers.html"><strong aria-hidden="true">4.5.</strong> Fibers</a></li><li class="chapter-item expanded "><a href="../core/error-handling.html"><strong aria-hidden="true">4.6.</strong> Error Handling</a></li><li class="chapter-item expanded "><a href="../core/macros.html"><strong aria-hidden="true">4.7.</strong> Macros</a></li><li class="chapter-item expanded "><a href="../core/match-from-scratch.html"><strong aria-hidden="true">4.8.</strong> Match From Scratch</a></li><li class="chapter-item expanded "><a href="../core/modules.html"><strong aria-hidden="true">4.9.</strong> Modules</a></li></ol></li><li class="chapter-item expanded "><a href="../concluding-thoughts.html"><strong aria-hidden="true">5.</strong> Concluding Thoughts</a></li><li class="chapter-item expanded "><a href="../faq.html"><strong aria-hidden="true">6.</strong> Frequently Asked Questions</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -134,17 +134,61 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="the-core-language"><a class="header" href="#the-core-language">The Core Language</a></h1>
-<p>In this chapter, we will take a look at the core language features offered by Passerine.</p>
+                        <h2 id="a-quick-sort-example"><a class="header" href="#a-quick-sort-example">A Quick(-sort) Example</a></h2>
+<p>Here's another slightly more complex example – a recursive quick-sort with questionable pivot selection:</p>
+<pre><code class="language-elm">sort = list -&gt; match list {
+    -- base case
+    [] -&gt; []
+
+    -- pivot is head, tail is remaining
+    [pivot, ..tail] -&gt; {
+        higher = filter { x -&gt; x &gt;= pivot } tail
+        lower  = filter { x -&gt; x &lt;  pivot } tail
+
+        (sorted_lower, sorted_higher) = (sort lower, sort higher)
+
+        sorted_lower
+            + [pivot]
+            + sorted_higher
+    }
+}
+</code></pre>
+<p>The first thing that you should notice is the use of a <code>match</code> expression. Like ML-style languages, Passerine makes extensive use of <em>pattern matching</em> and <em>destructuring</em> as a driver of computation. A match expression takes the form:</p>
+<pre><code class="language-elm">match value {
+    pattern₀ -&gt; expression₀
+    ...
+    patternₙ -&gt; expressionₙ
+}
+</code></pre>
+<p>Each <code>pattern -&gt; expression</code> pair is a <em>branch</em> – each <code>value</code> is against each branch in order until a branch successfully matches and evaluates – the match expression takes on the value of the matching branch. We'll take a deep dive into match statements <a href="#building-a-match-expression">later</a>, so keep this in mind.</p>
+<p>You might've also noticed the use of curly braces <code>{ ... }</code> after <code>[head, ..tail]</code>. This is a <em>block</em>, a group of expressions executed one after another. Each expression in a block is separated by a newline or semicolon; the block takes on the value of its last expression.</p>
+<p>The next thing to notice is this line:</p>
+<pre><code class="language-elm">(sorted_lower, sorted_higher) = (sort lower, sort higher)
+</code></pre>
+<p>This is a more complex assignment than the first one we saw. In this example, the pattern <code>(sorted_lower, sorted_higher)</code> is being matched against the expression <code>(sort lower, sort higher)</code>. This pattern is a <em>tuple</em> destructuring, if you've ever used Python or Rust, I'm sure you're familiar with it. This assignment is equivalent to:</p>
+<pre><code class="language-elm">sorted_lower  = sort lower
+sorted_higher = sort higher
+</code></pre>
+<p>There's no real reason to use tuple destructuring here – idiomatically, just using <code>sort lower</code> and <code>sort higher</code> is the better solution. We discuss pattern matching in depth in the <a href="#pattern-matching">next section</a>.</p>
+<p>Passerine also supports higher order functions (this should come as no surprise):</p>
+<pre><code class="language-elm">filter { x -&gt; x &gt;= pivot } tail
+</code></pre>
+<p><code>filter</code> takes a predicate (a function) and an iterable (like a list), and produces a new iterable where the predicate is true for all items. Although parenthesis could be used to group the inline function definition after <code>filter</code>, it's stylistically more coherent to use blocks for <em>regions of computation</em>. What's a region of computation? A region of computation is a series of multiple expressions, or a single expression that creates new bindings, like an assignment or a function definition.</p>
+<p>Passerine also allows lines to be split around operators to break up long expressions:</p>
+<pre><code class="language-elm">sorted_lower
+    + [pivot]
+    + sorted_higher
+</code></pre>
+<p>Although this is not a particularly long expression, splitting up lines by operations can help improve the legibility of some expressions.</p>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="../getting-started/hello-world.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="../core/syntax.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
-                            <a rel="next" href="../core/syntax.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next" href="../core/function-application.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
                         <div style="clear: both"></div>
@@ -153,10 +197,10 @@
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="../getting-started/hello-world.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="../core/syntax.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
-                    <a rel="next" href="../core/syntax.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next" href="../core/function-application.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
             </nav>

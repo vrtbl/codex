@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>The Road Ahead - The Passerine Codex</title>
+        <title>Frequently Asked Questions - The Passerine Codex</title>
         <!-- Custom HTML head -->
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
@@ -75,7 +75,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="preface.html"><strong aria-hidden="true">1.</strong> A Short Preface</a></li><li class="chapter-item expanded "><a href="road-ahead.html" class="active"><strong aria-hidden="true">2.</strong> The Road Ahead</a></li><li class="chapter-item expanded "><a href="getting-started/getting-started.html"><strong aria-hidden="true">3.</strong> Getting Started</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="getting-started/installation.html"><strong aria-hidden="true">3.1.</strong> Installation</a></li><li class="chapter-item expanded "><a href="getting-started/hello-world.html"><strong aria-hidden="true">3.2.</strong> Hello, World!</a></li></ol></li><li class="chapter-item expanded "><a href="core/core.html"><strong aria-hidden="true">4.</strong> The Core Language</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="core/syntax.html"><strong aria-hidden="true">4.1.</strong> Syntax</a></li><li class="chapter-item expanded "><a href="core/a-quick-example.html"><strong aria-hidden="true">4.2.</strong> A Quick(sort) Example</a></li><li class="chapter-item expanded "><a href="core/function-application.html"><strong aria-hidden="true">4.3.</strong> Function Application</a></li><li class="chapter-item expanded "><a href="core/pattern-matching.html"><strong aria-hidden="true">4.4.</strong> Pattern Matching</a></li><li class="chapter-item expanded "><a href="core/fibers.html"><strong aria-hidden="true">4.5.</strong> Fibers</a></li><li class="chapter-item expanded "><a href="core/error-handling.html"><strong aria-hidden="true">4.6.</strong> Error Handling</a></li><li class="chapter-item expanded "><a href="core/macros.html"><strong aria-hidden="true">4.7.</strong> Macros</a></li><li class="chapter-item expanded "><a href="core/match-from-scratch.html"><strong aria-hidden="true">4.8.</strong> Match From Scratch</a></li><li class="chapter-item expanded "><a href="core/modules.html"><strong aria-hidden="true">4.9.</strong> Modules</a></li></ol></li><li class="chapter-item expanded "><a href="concluding-thoughts.html"><strong aria-hidden="true">5.</strong> Concluding Thoughts</a></li><li class="chapter-item expanded "><a href="faq.html"><strong aria-hidden="true">6.</strong> Frequently Asked Questions</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="preface.html"><strong aria-hidden="true">1.</strong> A Short Preface</a></li><li class="chapter-item expanded "><a href="road-ahead.html"><strong aria-hidden="true">2.</strong> The Road Ahead</a></li><li class="chapter-item expanded "><a href="getting-started/getting-started.html"><strong aria-hidden="true">3.</strong> Getting Started</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="getting-started/installation.html"><strong aria-hidden="true">3.1.</strong> Installation</a></li><li class="chapter-item expanded "><a href="getting-started/hello-world.html"><strong aria-hidden="true">3.2.</strong> Hello, World!</a></li></ol></li><li class="chapter-item expanded "><a href="core/core.html"><strong aria-hidden="true">4.</strong> The Core Language</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="core/syntax.html"><strong aria-hidden="true">4.1.</strong> Syntax</a></li><li class="chapter-item expanded "><a href="core/a-quick-example.html"><strong aria-hidden="true">4.2.</strong> A Quick(sort) Example</a></li><li class="chapter-item expanded "><a href="core/function-application.html"><strong aria-hidden="true">4.3.</strong> Function Application</a></li><li class="chapter-item expanded "><a href="core/pattern-matching.html"><strong aria-hidden="true">4.4.</strong> Pattern Matching</a></li><li class="chapter-item expanded "><a href="core/fibers.html"><strong aria-hidden="true">4.5.</strong> Fibers</a></li><li class="chapter-item expanded "><a href="core/error-handling.html"><strong aria-hidden="true">4.6.</strong> Error Handling</a></li><li class="chapter-item expanded "><a href="core/macros.html"><strong aria-hidden="true">4.7.</strong> Macros</a></li><li class="chapter-item expanded "><a href="core/match-from-scratch.html"><strong aria-hidden="true">4.8.</strong> Match From Scratch</a></li><li class="chapter-item expanded "><a href="core/modules.html"><strong aria-hidden="true">4.9.</strong> Modules</a></li></ol></li><li class="chapter-item expanded "><a href="concluding-thoughts.html"><strong aria-hidden="true">5.</strong> Concluding Thoughts</a></li><li class="chapter-item expanded "><a href="faq.html" class="active"><strong aria-hidden="true">6.</strong> Frequently Asked Questions</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -134,24 +134,41 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h2 id="the-road-ahead"><a class="header" href="#the-road-ahead">The Road Ahead</a></h2>
-<p><img src="https://cdn.aarp.net/content/dam/aarp/home-and-family/family-and-friends/2018/05/1140-utah-road-trip-planning.imgcache.revc8d3f86f90c6edc63fc2b92a8a311a72.jpg" alt="A winding mountain desert road thing, much like the journey we're about to have!" /></p>
-<p>This codex is organized into a bunch of sections. Each section builds on the last. By the end, you should have a pretty good picture of what Passerine is, and what it aspires to be.</p>
-<p>We'll start by exploring the language the functional foundations on which Passerine is build. We'll then work towards patterns of building up and tearing data.</p>
-<p>With the core in place, it's time so shift gears. We'll rip through Passerine's trait and effect systems, and learn that - maybe - they're not so different after all. We'll also discuss how types and effects can be composed for greater control over the runtime and execution environment.</p>
-<p>With that sprint behind us, we'll then take a short detour, and chat about modules and package management. Here you'll meet aspen, and get some real dirt under your nails as we write a few projects together.</p>
-<p>With practical experience under our belts, some hidden patterns will slowly become obvious. In the final section of this Codex, we'll dive deep into the heart of macros and compile-time evaluation, and leverage the ultimate abstraction to bend Passerine to our will. If that doesn't sound crazy, I don't know what is!</p>
-<p>It's going to be a wild ride, dear reader, so you'd better buckle up!</p>
+                        <h2 id="faq"><a class="header" href="#faq">FAQ</a></h2>
+<p><strong>Q:</strong> Is Passerine ready for production use?</p>
+<p><strong>A:</strong> Not yet. Passerine is still in early stages of development, with frequent breaking changes. See the <a href="https://github.com/vrtbl/passerine/projects/1">Project Roadmap</a> to get an idea of what's in development.</p>
+<p><strong>Q:</strong> Is Passerine statically typed?</p>
+<p><strong>A:</strong> Currently, Passerine is strongly and dynamically¹ typed (technically structurally typed). This is partially out of necessity – Types are defined by patterns, and patterns can be where predicated. However, I've been doing a lot of research into Hindley-Milder type systems, and the various extensions that can be applied to them.</p>
+<p>I'm working towards making a compile-time type-checker for the language, based on Hindley-Milner type inference. With this system in place, I can make some assumptions to speed up the interpreter further and perhaps monomorphize/generate LLVM IR / WASM.</p>
+<p>This type checker is actually the target of the next release, so stay tuned!</p>
+<p><strong>Q:</strong> What about algebraic effects and kind-based macros?</p>
+<p><strong>A:</strong> I'm interested in eventually adding both these things to the language, but first I need to implement a nice type-checker and do some more research. Algebraic Effects would fill the design space of fibers, and kind based macros would provide a more solid base for passerine's macro system. Got any fresh language features you think would complement Passerine's design philosophy? Reach out!</p>
+<p><strong>Q:</strong> What is vaporization memory management?</p>
+<p><strong>A:</strong> When I was first designing Passerine, I was big into automatic compile-time memory management. Currently, there are a few ways to do this: from Rust's borrow-checker, to µ-Mitten's Proust ASAP, to Koka's Perceus, there are a lot of new and exciting ways to approach this problem.</p>
+<p>Vaporization is an automatic memory management system that allows for <em>Functional but in Place</em> style programming. For vaporization to work, three invariants must hold:</p>
+<ol>
+<li>All functions params are passed by value via a copy-on-write reference. This means that only the lifetimes of the returned objects need to be preserved, all others will be deleted when they go out of scope.</li>
+<li>A form of SSA is performed, where the last usage of any value is not a copy of that value.</li>
+<li>All closure references are immutable copies of a value. These copies may be reference-counted in an acyclical manner.</li>
+</ol>
+<p>With these invariants in place, vaporization ensures two things:</p>
+<ol>
+<li>Values are only alive where they are still <em>useful</em>.</li>
+<li>Code may be written in a functional style, but all mutations occur in-place as per rule 2.</li>
+</ol>
+<p>What's most interesting is that this system requires minimal interference from the compiler when used in conjunction with a VM. All the compiler has to do is annotate the last usage of the value of any variables; the rest can be done automatically and very efficiently at runtime.</p>
+<p>Why not use this? Mainly because of rule 3: 'closure references are immutable'. Passerine is pass-by-value, but currently allows mutation in the current scope a la let-style redefinition. But this is subject to change; and once it does, it's vaporization all the way, baby!</p>
+<p><strong>Q:</strong> Aren't there already enough programming languages?</p>
+<p><strong>A:</strong> Frankly, I think we've barely <em>scratched</em> the surface of programming language design. To say that Programming Language Design is saturated and at a local maxima is to not understand the nature of software development. Passerine is largely a test as to whether I can build a modern compiler pipeline. But what I'm even more interested in is the tooling that surrounds development environments.</p>
+<p>Case in point: text-based entry for programming languages has been around forever because it's fast. However, it's not always semantically correct. The number of correct programs is an infinity smaller than the number of possible text files. Yet it's still possible to make text-based entry systems that ensure semantic correctness while encouraging exploration. In the future, we need to develop new tools that more closely blur the line between language and environment. Pharo is a step in the right direction, as are Unison and similar efforts.</p>
+<p>I'd like to focus more on this in the future. An interesting project would be an editor/environment like Pharo/Unison for a small minimal language, like Scheme, or perhaps even Passerine.</p>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="preface.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="concluding-thoughts.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
-                            </a>
-                            <a rel="next" href="getting-started/getting-started.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
-                                <i class="fa fa-angle-right"></i>
                             </a>
                         <div style="clear: both"></div>
                     </nav>
@@ -159,11 +176,8 @@
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="preface.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="concluding-thoughts.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
-                    </a>
-                    <a rel="next" href="getting-started/getting-started.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
-                        <i class="fa fa-angle-right"></i>
                     </a>
             </nav>
 

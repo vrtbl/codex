@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>The Core Language - The Passerine Codex</title>
+        <title>Modules - The Passerine Codex</title>
         <!-- Custom HTML head -->
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
@@ -75,7 +75,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="../preface.html"><strong aria-hidden="true">1.</strong> A Short Preface</a></li><li class="chapter-item expanded "><a href="../road-ahead.html"><strong aria-hidden="true">2.</strong> The Road Ahead</a></li><li class="chapter-item expanded "><a href="../getting-started/getting-started.html"><strong aria-hidden="true">3.</strong> Getting Started</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../getting-started/installation.html"><strong aria-hidden="true">3.1.</strong> Installation</a></li><li class="chapter-item expanded "><a href="../getting-started/hello-world.html"><strong aria-hidden="true">3.2.</strong> Hello, World!</a></li></ol></li><li class="chapter-item expanded "><a href="../core/core.html" class="active"><strong aria-hidden="true">4.</strong> The Core Language</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../core/syntax.html"><strong aria-hidden="true">4.1.</strong> Syntax</a></li><li class="chapter-item expanded "><a href="../core/a-quick-example.html"><strong aria-hidden="true">4.2.</strong> A Quick(sort) Example</a></li><li class="chapter-item expanded "><a href="../core/function-application.html"><strong aria-hidden="true">4.3.</strong> Function Application</a></li><li class="chapter-item expanded "><a href="../core/pattern-matching.html"><strong aria-hidden="true">4.4.</strong> Pattern Matching</a></li><li class="chapter-item expanded "><a href="../core/fibers.html"><strong aria-hidden="true">4.5.</strong> Fibers</a></li><li class="chapter-item expanded "><a href="../core/error-handling.html"><strong aria-hidden="true">4.6.</strong> Error Handling</a></li><li class="chapter-item expanded "><a href="../core/macros.html"><strong aria-hidden="true">4.7.</strong> Macros</a></li><li class="chapter-item expanded "><a href="../core/match-from-scratch.html"><strong aria-hidden="true">4.8.</strong> Match From Scratch</a></li><li class="chapter-item expanded "><a href="../core/modules.html"><strong aria-hidden="true">4.9.</strong> Modules</a></li></ol></li><li class="chapter-item expanded "><a href="../concluding-thoughts.html"><strong aria-hidden="true">5.</strong> Concluding Thoughts</a></li><li class="chapter-item expanded "><a href="../faq.html"><strong aria-hidden="true">6.</strong> Frequently Asked Questions</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../preface.html"><strong aria-hidden="true">1.</strong> A Short Preface</a></li><li class="chapter-item expanded "><a href="../road-ahead.html"><strong aria-hidden="true">2.</strong> The Road Ahead</a></li><li class="chapter-item expanded "><a href="../getting-started/getting-started.html"><strong aria-hidden="true">3.</strong> Getting Started</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../getting-started/installation.html"><strong aria-hidden="true">3.1.</strong> Installation</a></li><li class="chapter-item expanded "><a href="../getting-started/hello-world.html"><strong aria-hidden="true">3.2.</strong> Hello, World!</a></li></ol></li><li class="chapter-item expanded "><a href="../core/core.html"><strong aria-hidden="true">4.</strong> The Core Language</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../core/syntax.html"><strong aria-hidden="true">4.1.</strong> Syntax</a></li><li class="chapter-item expanded "><a href="../core/a-quick-example.html"><strong aria-hidden="true">4.2.</strong> A Quick(sort) Example</a></li><li class="chapter-item expanded "><a href="../core/function-application.html"><strong aria-hidden="true">4.3.</strong> Function Application</a></li><li class="chapter-item expanded "><a href="../core/pattern-matching.html"><strong aria-hidden="true">4.4.</strong> Pattern Matching</a></li><li class="chapter-item expanded "><a href="../core/fibers.html"><strong aria-hidden="true">4.5.</strong> Fibers</a></li><li class="chapter-item expanded "><a href="../core/error-handling.html"><strong aria-hidden="true">4.6.</strong> Error Handling</a></li><li class="chapter-item expanded "><a href="../core/macros.html"><strong aria-hidden="true">4.7.</strong> Macros</a></li><li class="chapter-item expanded "><a href="../core/match-from-scratch.html"><strong aria-hidden="true">4.8.</strong> Match From Scratch</a></li><li class="chapter-item expanded "><a href="../core/modules.html" class="active"><strong aria-hidden="true">4.9.</strong> Modules</a></li></ol></li><li class="chapter-item expanded "><a href="../concluding-thoughts.html"><strong aria-hidden="true">5.</strong> Concluding Thoughts</a></li><li class="chapter-item expanded "><a href="../faq.html"><strong aria-hidden="true">6.</strong> Frequently Asked Questions</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -134,17 +134,84 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="the-core-language"><a class="header" href="#the-core-language">The Core Language</a></h1>
-<p>In this chapter, we will take a look at the core language features offered by Passerine.</p>
+                        <h2 id="modules"><a class="header" href="#modules">Modules</a></h2>
+<p>Passerine's module system allows large codebases to be broken out into indiviual reusable components. A module is a scopes turned into a struct, and isn't necessarily tied to the file system.</p>
+<p>Modules are defined using the <code>mod</code> keyword, which must be followed by a block <code>{ ... }</code>. Here's a simple module that defines some math utilities:</p>
+<pre><code class="language-elm">circle = mod {
+    PI     = 3.14159265358979
+    area   = r -&gt; r * r * PI
+    circum = r -&gt; r * PI * 2
+}
+
+pizza_radius = 12
+slices = 8
+slice_area = (circle::area pizza_radius) / slices
+</code></pre>
+<p><code>mod</code> takes all top-level declarations in a block - in this case, <code>PI</code>, <code>area</code>, and <code>circum</code> - and turns them into a struct with those fields. In essence, the above is equivalent to this struct:</p>
+<pre><code class="language-elm">circle = {
+    PI:     3.14159265358979
+    area:   r -&gt; r * r * PI
+    circum: r -&gt; r * PI * 2
+}
+</code></pre>
+<p><code>mod</code> is nice because it's an easy way to have multiple returns. In essesence, the <code>mod</code> keyword allows for first-class scoping, by turning scopes into structs:</p>
+<pre><code class="language-elm">index = numbers pos
+    -&gt; floor (len numbers * pos)
+
+quartiles = numbers -&gt; mod {
+    sorted = (sort numbers)
+    med = sorted::(index (1/2) sorted)
+    q1  = sorted::(index (1/4) sorted)
+    q3  = sorted::(index (3/4) sorted)
+}
+</code></pre>
+<p>Because we used the <code>mod</code> keyword in the above example, instead of returning a single value from the function, we return a struct containing all values in the fuction:</p>
+<pre><code class="language-elm">-- calculate statistics
+numbers = [1, 2, 3, 4, 5]
+stats   = quartiles numbers
+
+-- use `q1` and `q3` to calculate the interquartile range of `numbers`
+iqr     = stats::q3 - stats::q1
+print &quot;the IQR of { numbers } is { iqr } &quot;
+</code></pre>
+<p>This is really useful for writing functions that return multiple values.</p>
+<p>Aside from allowing us to group sets of related values into a single namespace, modules can be defined in different files, then be imported. Here's a module defined in a different file:</p>
+<pre><code class="language-elm">-- list_util.pn
+reduce = f start list -&gt; match list {
+    [] -&gt; start,
+    [head, ..tail] -&gt; f (reduce f tail, head)
+}
+
+sum     = reduce { (a, b) -&gt; a + b   } 0
+reverse = reduce { (a, b) -&gt; [b.., a]} []
+</code></pre>
+<p>This file defines a number of useful list utilities, defined in a traditional recursive style. If we want to use this module in <code>main.pn</code>, we import it using the <code>use</code> keyword:</p>
+<pre><code class="language-elm">-- main.pn
+use list_util
+
+numbers = [1, 1, 2, 3, 5]
+print (list_util::sum numbers)
+</code></pre>
+<p>Note that the <code>use</code> keyword is essentially the same thing as wrapping the contents of the imported file with the <code>mod</code> keyword:</p>
+<pre><code class="language-elm">-- use list_util
+list_util = mod { &lt;list_util.pn&gt; }
+</code></pre>
+<p>Once imported, <code>list_util</code> is just a struct. Because of this, features of the module system naturally arise from Passerine's existing semantics for manipulating structs. To import a subset of a module, we can do something like this:</p>
+<pre><code class="language-elm">reverse = { use list_util; list_util::reduce }
+</code></pre>
+<p>Likewise, we can import a module within a block scope to rename it:</p>
+<pre><code class="language-elm">list_stuff = { use list_util; list_util }
+</code></pre>
+<p>There are a number of nice properties that arise from this module system, we've just scratched the surface. As modules are just structs, the full power of passerine and its macro system are at your disposal for building extensible systems that compose well.</p>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="../getting-started/hello-world.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="../core/match-from-scratch.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
-                            <a rel="next" href="../core/syntax.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next" href="../concluding-thoughts.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
                         <div style="clear: both"></div>
@@ -153,10 +220,10 @@
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="../getting-started/hello-world.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="../core/match-from-scratch.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
-                    <a rel="next" href="../core/syntax.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next" href="../concluding-thoughts.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
             </nav>
